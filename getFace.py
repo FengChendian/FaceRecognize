@@ -8,11 +8,14 @@ cap = cv2.VideoCapture(0)
 # 如果更改此处，务必更改识别文件里的分类器
 face_detector = cv2.CascadeClassifier(r'./haarcascade_frontalface_alt2.xml') 
 
+
+if cap is None or cap.isOpened() is False:
+    exit('Camera is not opened!')
+
 #为即将录入的脸标记一个id
 face_id = input('\nPlease Input User name, and Look at the camera and wait ...\n')
 #sampleNum用来计数样本数目
 count = 0
-
 while True:    
     #从摄像头读取图片
     success,img = cap.read()  
