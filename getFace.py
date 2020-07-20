@@ -3,10 +3,13 @@ import cv2
 
 #调用笔记本内置摄像头，参数为0，如果有其他的摄像头可以调整参数为1,2
 cap = cv2.VideoCapture(0)
-#调用人脸分类器，要根据实际路径调整3
-face_detector = cv2.CascadeClassifier(r'./haarcascade_frontalface_default.xml')  #待更改
+
+#调用人脸分类器，要根据实际路径调整
+# 如果更改此处，务必更改识别文件里的分类器
+face_detector = cv2.CascadeClassifier(r'./haarcascade_frontalface_alt2.xml') 
+
 #为即将录入的脸标记一个id
-face_id = input('\n User data input,Look at the camera and wait ...')
+face_id = input('\nPlease Input User name, and Look at the camera and wait ...\n')
 #sampleNum用来计数样本数目
 count = 0
 
@@ -20,8 +23,8 @@ while True:
     else:   
         break
     #检测人脸，将每一帧摄像头记录的数据带入OpenCv中，让Classifier判断人脸
-    #其中gray为要检测的灰度图像，1.3为每次图像尺寸减小的比例，5为minNeighbors
-    faces = face_detector.detectMultiScale(gray, 1.3, 5)
+    #其中gray为要检测的灰度图像，1.2为每次图像尺寸减小的比例，5为minNeighbors
+    faces = face_detector.detectMultiScale(gray, 1.2, 5)  
 
     #框选人脸，for循环保证一个能检测的实时动态视频流
     for (x, y, w, h) in faces:
@@ -32,7 +35,7 @@ while True:
         # print(count)
         #保存图像，把灰度图片看成二维数组来检测人脸区域
         #(这里是建立了data的文件夹，当然也可以设置为其他路径或者调用数据库)
-        cv2.imwrite(r"./data/"+str(face_id)+'.'+str(count)+'.jpg',gray[y:y+h,x:x+w]) 
+        cv2.imwrite(r"./data/"+str(face_id)+'_'+str(count)+'.jpg',gray[y:y+h,x:x+w]) 
         #显示图片
         cv2.imshow('image',img)       
         #保持画面的连续。waitkey方法可以绑定按键保证画面的收放，通过q键退出摄像
@@ -40,9 +43,9 @@ while True:
     if k == '27':
         break        
         #或者得到800个样本后退出摄像，这里可以根据实际情况修改数据量，实际测试后800张的效果是比较理想的
-    elif count >= 400:
+    elif count >= 50:
         break
 
 #关闭摄像头，释放资源
-cap.realease()
+cap.release()
 cv2.destroyAllWindows()

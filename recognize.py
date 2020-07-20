@@ -8,7 +8,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('./trainner/trainner.yml')
 
 #再次调用人脸分类器
-cascade_path = "./haarcascade_frontalface_default.xml" 
+cascade_path = "./haarcascade_frontalface_alt2.xml" 
 face_cascade = cv2.CascadeClassifier(cascade_path)
 
 #加载一个字体，用于识别后，在图片上标注出对象的名字

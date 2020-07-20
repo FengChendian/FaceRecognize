@@ -32,12 +32,14 @@ def get_images_and_labels(path):
 
         #将图片转化为数组
         img_np = np.array(img,'uint8')
-
-        if os.path.split(image_path)[-1].split(".")[-1] != 'jpg':
+        # print(image_path[-1])
+        fileSplit = os.path.split(image_path)[-1].split(".")
+        fileType = fileSplit[-1]
+        if fileType != 'jpg':
             continue
 
         #为了获取id，将图片和路径分裂并获取
-        id = int(os.path.split(image_path)[-1].split(".")[1])
+        id = int(fileSplit[0].split('_')[1])
         faces = detector.detectMultiScale(img_np)
 
         #将获取的图片和id添加到list中
