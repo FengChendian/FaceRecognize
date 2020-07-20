@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 #导入pillow库，用于处理图像
 #设置之前收集好的数据文件路径
-path = './data'
+path = r'./data'
 
 #初始化识别的方法
 recog = cv2.face.LBPHFaceRecognizer_create()
@@ -17,7 +17,7 @@ detector = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 #注意图片的命名格式为User.id.sampleNum
 def get_images_and_labels(path):
     image_paths = [os.path.join(path,f) for f in os.listdir(path)]
-    #新建连个list用于存放
+    #新建2个list用于存放
     face_samples = []
     ids = []
 
@@ -25,6 +25,9 @@ def get_images_and_labels(path):
     for image_path in image_paths:
 
         #通过图片路径将其转换为灰度图片
+        if 'gitkeep' in image_path:
+            print(image_path)
+            continue
         img = Image.open(image_path).convert('L')
 
         #将图片转化为数组
@@ -46,6 +49,7 @@ def get_images_and_labels(path):
 #调用函数并将数据喂给识别器训练
 print('Training...')
 faces,ids = get_images_and_labels(path)
+print(ids)
 #训练模型
 recog.train(faces,np.array(ids))
 #保存模型
