@@ -11,7 +11,7 @@ path = r'./data'
 #初始化识别的方法
 recog = cv2.face.LBPHFaceRecognizer_create()
 #调用熟悉的人脸分类器
-detector = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
+detector = cv2.CascadeClassifier('./haarcascade_frontalface_alt2.xml')
 
 #创建一个函数，用于从数据集文件夹中获取训练图片,并获取id
 #注意图片的命名格式为User.id.sampleNum
@@ -26,7 +26,7 @@ def get_images_and_labels(path):
 
         #通过图片路径将其转换为灰度图片
         if 'gitkeep' in image_path:
-            print(image_path)
+            # print(image_path)
             continue
         img = Image.open(image_path).convert('L')
 

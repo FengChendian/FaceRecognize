@@ -20,7 +20,7 @@ idnum = 0
 # names = ['初始','admin','zyc','user2','user3']
 
 #调用摄像头
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 minW = 0.1*cam.get(3)
 minH = 0.1*cam.get(4)
 

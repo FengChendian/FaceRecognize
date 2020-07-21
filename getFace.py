@@ -2,7 +2,7 @@
 import cv2
 
 #调用笔记本内置摄像头，参数为0，如果有其他的摄像头可以调整参数为1,2
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 #调用人脸分类器，要根据实际路径调整
 # 如果更改此处，务必更改识别文件里的分类器
