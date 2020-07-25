@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import getFace as get
 import train as tr
 import  recognize as rec
